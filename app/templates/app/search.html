@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block extrahead %}
+{{ filter.form.media }}
+{% endblock %}
+
+{% block content %}
+<form method="get" class="form">
+  {% csrf_token %}
+  {{ filter.form|crispy }}
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+{% for obj in filter.qs %}
+  date_field: {{ obj.date_field }} datetime_field: {{ obj.datetime_field }}<br/>
+{% endfor %}
+{% endblock %}
